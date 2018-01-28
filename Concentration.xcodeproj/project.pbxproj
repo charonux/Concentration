@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A29037F201BB0E200DC6317 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A29037E201BB0E200DC6317 /* Concentration.swift */; };
+		8A290381201BB2A300DC6317 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A290380201BB2A300DC6317 /* Card.swift */; };
 		8AEFA77F1FFBEB9100336E0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEFA77E1FFBEB9100336E0D /* AppDelegate.swift */; };
 		8AEFA7811FFBEB9100336E0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEFA7801FFBEB9100336E0D /* ViewController.swift */; };
 		8AEFA7841FFBEB9100336E0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AEFA7821FFBEB9100336E0D /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A29037E201BB0E200DC6317 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		8A290380201BB2A300DC6317 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		8AEFA77B1FFBEB9000336E0D /* Concentration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Concentration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AEFA77E1FFBEB9100336E0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8AEFA7801FFBEB9100336E0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +71,8 @@
 				8ABE72B22018873C0052616B /* Supporting Files */,
 				8AEFA7801FFBEB9100336E0D /* ViewController.swift */,
 				8AEFA7821FFBEB9100336E0D /* Main.storyboard */,
+				8A29037E201BB0E200DC6317 /* Concentration.swift */,
+				8A290380201BB2A300DC6317 /* Card.swift */,
 				8AEFA78A1FFBEB9100336E0D /* Info.plist */,
 			);
 			path = Concentration;
@@ -146,6 +152,8 @@
 			files = (
 				8AEFA7811FFBEB9100336E0D /* ViewController.swift in Sources */,
 				8AEFA77F1FFBEB9100336E0D /* AppDelegate.swift in Sources */,
+				8A29037F201BB0E200DC6317 /* Concentration.swift in Sources */,
+				8A290381201BB2A300DC6317 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
