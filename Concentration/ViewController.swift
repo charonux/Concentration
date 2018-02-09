@@ -1,8 +1,10 @@
 import UIKit
 class ViewController: UIViewController {
-    
+    //"connection, green arrow from MVC,object, instance" that connects Controller to the Model
+    //lazy means that it doesnt actually initialize until someone grabs it
+    //this way we cant say that var game its it initialized
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
-    
+
     var flipCount  = 0 {
         didSet {
             flipCountLabel.text = "Flips: \(flipCount)"
@@ -13,7 +15,10 @@ class ViewController: UIViewController {
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
+            //pass to the model to handle
             game.chooseCard(at: cardNumber)
+            //after the informing of the Model above, it might change
+            //thats why here we must update also our View from the Model
             updateViewFromModel()
         }
     }

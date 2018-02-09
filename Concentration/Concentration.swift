@@ -6,11 +6,13 @@
 //  Copyright © 2018 Kay Remus Barth. All rights reserved.
 //
 import Foundation
+//class have inheritance and they are reference types
 class Concentration {
-    var cards = [Card]()
+    //public property
+    var cards = [Card]()//Array have also a ninit with no arguments to create an epty array
     var indexOfOneAndOnlyFaceUpCard: Int?
-    
-    func chooseCard(at index: Int){
+    //public API method, user can only interact by choosing a card
+    func chooseCard(at index: Int){ //choosing card by index
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 //check if cards match
@@ -33,7 +35,7 @@ class Concentration {
     init(numberOfPairsOfCards: Int) {
         for _ in 1...numberOfPairsOfCards{
             let card = Card()
-            cards += [card,card]
+            cards += [card,card]//we do this becouse card is values type
         }
         //TODO: Shuffle the cards
     }
