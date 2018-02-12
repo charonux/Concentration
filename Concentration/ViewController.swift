@@ -12,6 +12,17 @@ class ViewController: UIViewController {
     }
     @IBOutlet weak var flipCountLabel: UILabel!
     @IBOutlet var cardButtons: [UIButton]!
+    @IBAction func newGame(_ sender: UIButton) {
+        flipCount = 0
+        emojiChoices = emojiBackUp
+        emoji.removeAll()
+        game.indexOfOneAndOnlyFaceUpCard = nil
+        for index in game.cards.indices {
+            game.cards[index].isFaceUp = false
+            game.cards[index].isMatched = false
+        }
+        updateViewFromModel()
+    }
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
@@ -35,10 +46,14 @@ class ViewController: UIViewController {
             }
         }
     }
+    var emojiBackUp = [String]()
     var emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎","🌓"]
     var emoji = [Int:String]()
     
     func emoji(for card: Card) -> String {
+        if emojiBackUp.isEmpty {
+            emojiBackUp = emojiChoices
+        }
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
             let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
             emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
