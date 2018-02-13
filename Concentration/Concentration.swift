@@ -9,7 +9,7 @@ import Foundation
 //class have inheritance and they are reference types
 class Concentration {
     //public property
-    var cards = [Card]()//Array have also a ninit with no arguments to create an epty array
+    var cards = [Card]()//Array have also a init with no arguments to create an epmty array
     var indexOfOneAndOnlyFaceUpCard: Int?
     //public API method, user can only interact by choosing a card
     func chooseCard(at index: Int){ //choosing card by index
@@ -33,10 +33,19 @@ class Concentration {
         }
     }
     init(numberOfPairsOfCards: Int) {
-        for _ in 1...numberOfPairsOfCards{
+        cards.reserveCapacity(numberOfPairsOfCards * 2)
+        for _ in 1...numberOfPairsOfCards {
             let card = Card()
-            cards += [card,card]//we do this becouse card is values type
+            cards += [card,card]
         }
-        //TODO: Shuffle the cards
+        for _ in 1...numberOfPairsOfCards * 2 + 1{
+            let positionOne = Int(arc4random_uniform(UInt32(numberOfPairsOfCards * 2)))
+            let positionTwo = Int(arc4random_uniform(UInt32(numberOfPairsOfCards * 2)))
+            if positionOne != positionTwo {
+                let temporaryCard = cards[positionOne]
+                cards[positionOne] = cards[positionTwo]
+                cards[positionTwo] = temporaryCard
+            }
+        }
     }
 }
