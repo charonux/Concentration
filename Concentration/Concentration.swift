@@ -33,12 +33,11 @@ class Concentration {
         }
     }
     init(numberOfPairsOfCards: Int) {
-        cards.reserveCapacity(numberOfPairsOfCards * 2)
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card,card]
         }
-        for _ in 1...numberOfPairsOfCards * 2 + 1{
+        for _ in 1...numberOfPairsOfCards * 2 {
             let positionOne = Int(arc4random_uniform(UInt32(numberOfPairsOfCards * 2)))
             let positionTwo = Int(arc4random_uniform(UInt32(numberOfPairsOfCards * 2)))
             if positionOne != positionTwo {
