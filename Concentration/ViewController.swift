@@ -4,7 +4,7 @@ class ViewController: UIViewController {
     //lazy means that it doesnt actually initialize until someone grabs it
     //this way we cant say that var game its it initialized
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
-
+    
     var flipCount  = 0 {
         didSet {
             flipCountLabel.text = "Flips: \(flipCount)"
@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     @IBOutlet var cardButtons: [UIButton]!
     @IBAction func newGame(_ sender: UIButton) {
         flipCount = 0
-        emojiChoices = emojiBackUp
         emoji.removeAll()
         game.indexOfOneAndOnlyFaceUpCard = nil
         for index in game.cards.indices {
@@ -24,6 +23,9 @@ class ViewController: UIViewController {
         updateViewFromModel()
     }
     @IBAction func touchCard(_ sender: UIButton) {
+        if flipCount == 0 {
+            emojiChoices = returnRandomTheme()
+        }
         flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
             //pass to the model to handle
@@ -46,14 +48,22 @@ class ViewController: UIViewController {
             }
         }
     }
-    var emojiBackUp = [String]()
-    var emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎","🌓"]
+    var themeOfEmojies = [Int:[String]]()
+    var emojiChoices = [String]()
     var emoji = [Int:String]()
     
+    func returnRandomTheme() -> [String] {
+        themeOfEmojies[0] = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎","🌓"]
+        themeOfEmojies[1] = ["😀","😅","😇","😍","😙","😛","🤪","🤩","😟","😖"]
+        themeOfEmojies[2] = ["🏐","🏉","🏈","⚽️","🎱","⚾️","🏀","🎾","🏓","🏒"]
+        themeOfEmojies[3] = ["🏄‍♀️","🏊‍♀️","🚴‍♀️","🤽‍♀️","🏌️‍♂️","🏋️‍♂️","🏇","⛷","🏂","🤺"]
+        themeOfEmojies[4] = ["🐶","🐱","🐭","🐰","🦊","🐻","🐼","🐸","🐧","🐥"]
+        themeOfEmojies[5] = ["🍐","🍉","🥥","🌽","🥕","🥦","🥝","🍋","🍌","🍑"]
+        let randomIndex = Int(arc4random_uniform(UInt32(themeOfEmojies.count)))
+        return themeOfEmojies[randomIndex]!
+    }
+    
     func emoji(for card: Card) -> String {
-        if emojiBackUp.isEmpty {
-            emojiBackUp = emojiChoices
-        }
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
             let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
             emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
