@@ -8,6 +8,7 @@
 import Foundation
 //class have inheritance and they are reference types
 class Concentration {
+    var gameScore = 0
     //public property
     var cards = [Card]()//Array have also a init with no arguments to create an epmty array
     var indexOfOneAndOnlyFaceUpCard: Int?
@@ -19,6 +20,7 @@ class Concentration {
                 if cards[matchIndex].identifier == cards[index].identifier {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
+                    gameScore += 2
                 }
                 cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = nil
