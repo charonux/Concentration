@@ -2,20 +2,14 @@ import UIKit
 class ViewController: UIViewController {
     //"connection, green arrow from MVC,object, instance" that connects Controller to the Model
     //lazy means that it doesnt actually initialize until someone grabs it
-    //this way we cant say that var game its it initialized
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
     
-    var flipCount  = 0 {
-        didSet {
-            flipCountLabel.text = "Flips: \(flipCount)"
-        }
-    }
     @IBOutlet weak var flipCountLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet var cardButtons: [UIButton]!
     @IBAction func newGame(_ sender: UIButton) {
-        flipCount = 0
         game.gameScore = 0
+        game.flipCount = 0
         emoji.removeAll()
         game.indexOfOneAndOnlyFaceUpCard = nil
         for index in game.cards.indices {
@@ -25,10 +19,9 @@ class ViewController: UIViewController {
         updateViewFromModel()
     }
     @IBAction func touchCard(_ sender: UIButton) {
-        if flipCount == 0 {
+        if game.flipCount == 0 {
             emojiChoices = returnRandomTheme()
         }
-        flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
             //pass to the model to handle
             game.chooseCard(at: cardNumber)
@@ -41,6 +34,7 @@ class ViewController: UIViewController {
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
+            flipCountLabel.text = "Flips: \(game.flipCount)"
             if card.isFaceUp {
                 button.setTitle(emoji( for: card), for: UIControlState.normal)
                 button.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)

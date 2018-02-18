@@ -9,14 +9,16 @@ import Foundation
 //class have inheritance and they are reference types
 class Concentration {
     var gameScore = 0
+    var flipCount = 0
     var scoreMismatchPenalty = Array(repeating: 0, count: 20)
     //public property
     var cards = [Card]()//Array have also a init with no arguments to create an epmty array
     var indexOfOneAndOnlyFaceUpCard: Int?
     //public API method, user can only interact by choosing a card
     func chooseCard(at index: Int){ //choosing card by index
+        flipCount += 1
         if !cards[index].isMatched {
-            scoreMismatchPenalty[index] += 1 //the card is known
+            scoreMismatchPenalty[index] += 1 //the card is known now
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 //check if cards match
                 if cards[matchIndex].identifier == cards[index].identifier {
