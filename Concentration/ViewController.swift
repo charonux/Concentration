@@ -2,7 +2,11 @@ import UIKit
 class ViewController: UIViewController {
     //"connection, green arrow from MVC,object, instance" that connects Controller to the Model
     //lazy means that it doesnt actually initialize until someone grabs it
-    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+    lazy var game = Concentration(numberOfPairsOfCards: (numberOfPairsOfCards))
+    
+    var numberOfPairsOfCards: Int {
+        return (cardButtons.count + 1) / 2
+    }
     
     @IBOutlet weak var flipCountLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!

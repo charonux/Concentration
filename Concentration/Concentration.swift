@@ -7,27 +7,21 @@ class Concentration {
     var cards = [Card]()
     var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
-            var possibleReturnIndex = 0
-            var countOfFaceUpCards = 0
+            var foundIndex: Int? // a good case of using optional
             for index in cards.indices {
                 if cards[index].isFaceUp {
-                    possibleReturnIndex = index
-                    countOfFaceUpCards += 1
+                    if foundIndex == nil {
+                        foundIndex = index
+                    } else {
+                        return nil //there are two cards
+                    }
                 }
             }
-                if countOfFaceUpCards == 1 {
-                    return possibleReturnIndex
-                } else {
-                    return nil
-                }
-            }
+            return foundIndex
+        }
         set {
             for index in cards.indices {
-                if index == newValue {
-                    cards[index].isFaceUp = true
-                } else {
-                    cards[index].isFaceUp = false
-                }
+                cards[index].isFaceUp = (index == newValue) //cool trick
             }
         }
     }
