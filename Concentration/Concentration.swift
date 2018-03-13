@@ -1,11 +1,10 @@
 import Foundation
-
 class Concentration {
     var gameScore = 0
     var flipCount = 0
-    var scoreMismatchPenalty = Array(repeating: 0, count: 20)
-    var cards = [Card]()
-    var indexOfOneAndOnlyFaceUpCard: Int? {
+    private var scoreMismatchPenalty = Array(repeating: 0, count: 20)
+    private(set) var cards = [Card]()
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             var foundIndex: Int? // a good case of using optional
             for index in cards.indices {
@@ -25,7 +24,7 @@ class Concentration {
             }
         }
     }
-    func chooseCard(at index: Int) { //choosing card by index
+    func chooseCard(at index: Int) {
         flipCount += 1
         if !cards[index].isMatched {
             scoreMismatchPenalty[index] += 1 //the card is known now
@@ -48,6 +47,13 @@ class Concentration {
             } else {
                 indexOfOneAndOnlyFaceUpCard = index
             }
+        }
+    }
+    func newGame() {
+        indexOfOneAndOnlyFaceUpCard = nil
+        for index in cards.indices {
+            cards[index].isFaceUp = false
+            cards[index].isMatched = false
         }
     }
     init(numberOfPairsOfCards: Int) {

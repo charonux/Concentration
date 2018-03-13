@@ -2,27 +2,23 @@ import UIKit
 class ViewController: UIViewController {
     //"connection, green arrow from MVC,object, instance" that connects Controller to the Model
     //lazy means that it doesnt actually initialize until someone grabs it
-    lazy var game = Concentration(numberOfPairsOfCards: (numberOfPairsOfCards))
+    //private special because numberOfPairsOfCards is strong related to the number of acards in the UI
+    private lazy var game = Concentration(numberOfPairsOfCards: (numberOfPairsOfCards))
     
-    var numberOfPairsOfCards: Int {
+    var numberOfPairsOfCards: Int { //computed property, if it only read only, get is not necessary
         return (cardButtons.count + 1) / 2
     }
-    
-    @IBOutlet weak var flipCountLabel: UILabel!
-    @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet var cardButtons: [UIButton]!
-    @IBAction func newGame(_ sender: UIButton) {
+    @IBOutlet private weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var scoreLabel: UILabel!
+    @IBOutlet private var cardButtons: [UIButton]!
+    @IBAction private func newGame(_ sender: UIButton) {
         game.gameScore = 0
         game.flipCount = 0
         emoji.removeAll()
-        game.indexOfOneAndOnlyFaceUpCard = nil
-        for index in game.cards.indices {
-            game.cards[index].isFaceUp = false
-            game.cards[index].isMatched = false
-        }
+        game.newGame()
         updateViewFromModel()
     }
-    @IBAction func touchCard(_ sender: UIButton) {
+    @IBAction private func touchCard(_ sender: UIButton) {
         if game.flipCount == 0 {
             emojiChoices = returnRandomTheme()
         }
@@ -34,7 +30,7 @@ class ViewController: UIViewController {
             updateViewFromModel()
         }
     }
-    func updateViewFromModel(){
+    private func updateViewFromModel(){
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
@@ -49,11 +45,10 @@ class ViewController: UIViewController {
             scoreLabel.text = "Score: \(game.gameScore)"
         }
     }
-    var themeOfEmojies = [Int:[String]]()
-    var emojiChoices = [String]()
-    var emoji = [Int:String]()
-    
-    func returnRandomTheme() -> [String] {
+    private var themeOfEmojies = [Int:[String]]()
+    private var emojiChoices = [String]()
+    private var emoji = [Int:String]()
+    private func returnRandomTheme() -> [String] {
         themeOfEmojies[0] = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎","🌓"]
         themeOfEmojies[1] = ["😀","😅","😇","😍","😙","😛","🤪","🤩","😟","😖"]
         themeOfEmojies[2] = ["🏐","🏉","🏈","⚽️","🎱","⚾️","🏀","🎾","🏓","🏒"]
@@ -63,8 +58,7 @@ class ViewController: UIViewController {
         let randomIndex = Int(arc4random_uniform(UInt32(themeOfEmojies.count)))
         return themeOfEmojies[randomIndex]!
     }
-    
-    func emoji(for card: Card) -> String {
+    private func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
             let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
             emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
