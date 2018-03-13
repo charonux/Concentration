@@ -25,6 +25,7 @@ class Concentration {
         }
     }
     func chooseCard(at index: Int) {
+        assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index): chosen index not in the cards")
         flipCount += 1
         if !cards[index].isMatched {
             scoreMismatchPenalty[index] += 1 //the card is known now
@@ -57,6 +58,7 @@ class Concentration {
         }
     }
     init(numberOfPairsOfCards: Int) {
+        assert(numberOfPairsOfCards > 0, "Concetration.init(\(numberOfPairsOfCards)): you must have at least one pair of cards")
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card,card]
