@@ -64,8 +64,8 @@ class Concentration {
             cards += [card,card]
         }
         for _ in 1...numberOfPairsOfCards * 2 {
-            let positionOne = Int(arc4random_uniform(UInt32(numberOfPairsOfCards * 2)))
-            let positionTwo = Int(arc4random_uniform(UInt32(numberOfPairsOfCards * 2)))
+            let positionOne = (numberOfPairsOfCards * 2).arc4random
+            let positionTwo = (numberOfPairsOfCards * 2).arc4random
             if positionOne != positionTwo {
                 let temporaryCard = cards[positionOne]
                 cards[positionOne] = cards[positionTwo]
