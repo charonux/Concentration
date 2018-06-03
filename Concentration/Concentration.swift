@@ -1,5 +1,5 @@
 import Foundation
-class Concentration {
+struct Concentration {
     var gameScore = 0
     var flipCount = 0
     private var scoreMismatchPenalty = Array(repeating: 0, count: 20)
@@ -24,7 +24,7 @@ class Concentration {
             }
         }
     }
-    func chooseCard(at index: Int) {
+    mutating func chooseCard(at index: Int) {
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index): chosen index not in the cards")
         flipCount += 1
         if !cards[index].isMatched {
@@ -50,7 +50,7 @@ class Concentration {
             }
         }
     }
-    func newGame() {
+    mutating func newGame() {
         indexOfOneAndOnlyFaceUpCard = nil
         for index in cards.indices {
             cards[index].isFaceUp = false
