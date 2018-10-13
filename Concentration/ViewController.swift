@@ -36,10 +36,10 @@ class ViewController: UIViewController {
             let card = game.cards[index]
             flipCountLabel.text = "Flips: \(game.flipCount)"
             if card.isFaceUp {
-                button.setTitle(emoji( for: card), for: UIControlState.normal)
+                button.setTitle(emoji( for: card), for: UIControl.State.normal)
                 button.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
             } else {
-                button.setTitle("", for: UIControlState.normal)
+                button.setTitle("", for: UIControl.State.normal)
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0) : #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
             }
             scoreLabel.text = "Score: \(game.gameScore)"
